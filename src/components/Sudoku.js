@@ -33,8 +33,16 @@ class Sudoku extends Component {
 
   checkRowCol(grid, row, col, val) {
     for (let i = 0; i < LENGTH; i++) {
-      if (grid[i][col] === val || grid[row][i] === val) {
-        return false;
+      if (i !== row) {
+        if (grid[i][col] === val) {
+          return false;
+        }
+      }
+
+      if (i !== col) {
+        if (grid[row][i] === val) {
+          return false;
+        }
       }
     }
 
@@ -56,8 +64,10 @@ class Sudoku extends Component {
 
     for (let i = rows[0]; i < rows[1]; i++) {
       for (let j = cols[0]; j < cols[1]; j++) {
-        if (grid[i][j] === val) {
-          return false;
+        if (i !== row && j !== col) {
+          if (grid[i][j] === val) {
+            return false;
+          }
         }
       }
     }
@@ -65,33 +75,52 @@ class Sudoku extends Component {
     return true;
   }
 
-  getNumbers(grid, row, col) {
-    const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    return nums.filter(num => this.checkRowCol(grid, row, col, num) && this.checkSquare(grid, row, col, num));
-  }
-
-  solve(grid) {
+  getEmpty(grid) {
+    const empty = []
     for (let i = 0; i < LENGTH; i++) {
       for (let j = 0; j < LENGTH; j++) {
         if (grid[i][j] === '') {
-          const nums = this.getNumbers(grid, i, j);
-          for (let k = 0; k < nums.length; k++) {
-            grid[i][j] = nums[k];
-            this.setState(grid);
-            if (!this.solve(grid)) {
-              grid[i][j] = ''
-              this.setState(grid);
-            } else {
-              break;
-            }
-          }
-
-          return !(grid[i][j] === '');
+          empty.push([i, j])
         }
       }
     }
+    return empty
+  }
 
-    return true;
+  solve(grid) {
+    const empty = this.getEmpty(grid);
+
+    const saved = [];
+    for (let i = 0; i < empty.length; i++) {
+      saved.push(1);
+    }
+
+    let i = 0;
+    while (i < empty.length && i > -1) {
+      let set = false
+      const [row, col] = empty[i];
+      let prev = saved[i];
+
+      for (let j = prev; j < LENGTH + 1; j++) {
+        const val = j.toString();
+        grid[row][col] = val;
+        this.setState({grid});
+
+        if (this.checkSquare(grid, row, col, val) && this.checkRowCol(grid, row, col, val)) {
+          set = true
+          saved[i] = parseInt(val) + 1;
+          i++;
+          break;
+        }
+      }
+
+      if (!set) {
+        saved[i] = 1;
+        grid[row][col] = ''
+        this.setState({grid});
+        i--;
+      }
+    }
   }
 
   render() {
