@@ -130,6 +130,7 @@ class Sudoku extends Component {
           <Grid grid={this.state.grid} />
         </div>
         <button onClick={() => this.solve(this.state.grid)}>Solve</button>
+        <button onClick={() => this.setState({grid: this.randomGrid()})}>Random</button>
       </div>
     );
   }
