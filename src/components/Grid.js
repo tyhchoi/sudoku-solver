@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Square from './Square';
 
 class Grid extends Component {
+  static propTypes = {
+    grid: PropTypes.array
+  }
+
   render() {
     const { grid } = this.props;
 
