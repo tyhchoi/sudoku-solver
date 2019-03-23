@@ -15,8 +15,8 @@ const readFile = (file) => new Promise( ( resolve, reject ) => {
 });
 
 const createFile = async () => {
-  const data = await readFile('./sudoku.csv')
-  fs.writeFileSync('sudoku.json', JSON.stringify({data}))
+  const data = await readFile('../files/sudoku.csv')
+  fs.writeFileSync('../files/sudoku.json', JSON.stringify({data}))
 }
 
 createFile()

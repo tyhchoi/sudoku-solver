@@ -82,7 +82,6 @@ const getEmpty = (grid) => {
 
 const solve = (grid) => {
   const gridStates = [];
-  const length = grid.length;
   const empty = getEmpty(grid);
 
   const saved = [];
@@ -96,7 +95,7 @@ const solve = (grid) => {
     const [row, col] = empty[i];
     let prev = saved[i];
 
-    for (let j = prev; j < length + 1; j++) {
+    for (let j = prev; j < LENGTH + 1; j++) {
       const val = j.toString();
       grid[row][col] = val;
       gridStates.push(JSON.parse(JSON.stringify(grid)));
