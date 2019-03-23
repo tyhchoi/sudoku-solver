@@ -7,7 +7,8 @@ const NUMVALS = 65500;
 
 class Sudoku extends Component {
   state = {
-    grid: this.randomGrid()
+    grid: this.randomGrid(),
+    interval: 10
   }
 
   randomGrid() {
@@ -76,18 +77,19 @@ class Sudoku extends Component {
   }
 
   getEmpty(grid) {
-    const empty = []
+    const empty = [];
     for (let i = 0; i < LENGTH; i++) {
       for (let j = 0; j < LENGTH; j++) {
         if (grid[i][j] === '') {
-          empty.push([i, j])
+          empty.push([i, j]);
         }
       }
     }
-    return empty
+    return empty;
   }
 
-  solve(grid) {
+  solve(grid, states) {
+    const length = grid.length;
     const empty = this.getEmpty(grid);
 
     const saved = [];
@@ -101,10 +103,10 @@ class Sudoku extends Component {
       const [row, col] = empty[i];
       let prev = saved[i];
 
-      for (let j = prev; j < LENGTH + 1; j++) {
+      for (let j = prev; j < length + 1; j++) {
         const val = j.toString();
         grid[row][col] = val;
-        this.setState({grid});
+        states.push(JSON.parse(JSON.stringify(grid)));
 
         if (this.checkSquare(grid, row, col, val) && this.checkRowCol(grid, row, col, val)) {
           set = true
@@ -117,20 +119,37 @@ class Sudoku extends Component {
       if (!set) {
         saved[i] = 1;
         grid[row][col] = ''
-        this.setState({grid});
+        states.push(JSON.parse(JSON.stringify(grid)));
         i--;
       }
     }
   }
 
+  steps() {
+    const states = [];
+    this.solve(this.state.grid, states);
+
+    for (let i = 0; i < states.length; i++) {
+      setTimeout(() => { this.setState({grid: states[i]})}, (i + 1) * this.state.interval);
+    }
+  }
+
+  handleChange(e) {
+    this.setState({interval: e.target.value})
+  }
+
   render() {
     return (
-      <div className="game">
-        <div className="game-grid">
+      <div className='sudoku'>
+        <div className='sudoku-grid'>
           <Grid grid={this.state.grid} />
         </div>
-        <button onClick={() => this.solve(this.state.grid)}>Solve</button>
+        <button onClick={() => this.steps()}>Solve</button>
         <button onClick={() => this.setState({grid: this.randomGrid()})}>Random</button>
+        <label htmlFor='speed'>Faster</label>
+        <input type='range' id='start' name='speed' min='0' max='100' step='10'
+          defaultValue={this.state.interval} onChange={this.handleChange.bind(this)} />
+        <label htmlFor='speed'>Slower</label>
       </div>
     );
   }
