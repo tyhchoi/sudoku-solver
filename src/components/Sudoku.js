@@ -6,9 +6,16 @@ const LENGTH = 9;
 const NUMVALS = 65500;
 
 class Sudoku extends React.Component {
-  state = {
-    grid: this.randomGrid(),
-    interval: 10
+  constructor() {
+    super();
+    const grid = this.randomGrid();
+    const gridStates = this.solve(JSON.parse(JSON.stringify(grid)));
+
+    this.state = {
+      grid,
+      gridStates,
+      interval: 10
+    };
   }
 
   randomGrid() {
@@ -88,7 +95,8 @@ class Sudoku extends React.Component {
     return empty;
   }
 
-  solve(grid, states) {
+  solve(grid) {
+    const gridStates = [];
     const length = grid.length;
     const empty = this.getEmpty(grid);
 
@@ -99,17 +107,17 @@ class Sudoku extends React.Component {
 
     let i = 0;
     while (i < empty.length && i > -1) {
-      let set = false
+      let set = false;
       const [row, col] = empty[i];
       let prev = saved[i];
 
       for (let j = prev; j < length + 1; j++) {
         const val = j.toString();
         grid[row][col] = val;
-        states.push(JSON.parse(JSON.stringify(grid)));
+        gridStates.push(JSON.parse(JSON.stringify(grid)));
 
         if (this.checkSquare(grid, row, col, val) && this.checkRowCol(grid, row, col, val)) {
-          set = true
+          set = true;
           saved[i] = parseInt(val) + 1;
           i++;
           break;
@@ -118,20 +126,31 @@ class Sudoku extends React.Component {
 
       if (!set) {
         saved[i] = 1;
-        grid[row][col] = ''
-        states.push(JSON.parse(JSON.stringify(grid)));
+        grid[row][col] = '';
+        gridStates.push(JSON.parse(JSON.stringify(grid)));
         i--;
       }
     }
+
+    return gridStates;
   }
 
   steps() {
-    const states = [];
-    this.solve(this.state.grid, states);
+    let count = 0;
+    const timer = setInterval(() => {
+      this.setState({grid: this.state.gridStates[count]});
+      count++;
+      if (count === this.state.gridStates.length) {
+        clearInterval(timer);
+      }
+    }, this.state.interval);
+  }
 
-    for (let i = 0; i < states.length; i++) {
-      setTimeout(() => { this.setState({grid: states[i]})}, (i + 1) * this.state.interval);
-    }
+  newRandom() {
+    const grid = this.randomGrid();
+    const gridStates = this.solve(JSON.parse(JSON.stringify(grid)));
+
+    this.setState({grid, gridStates});
   }
 
   handleChange(e) {
@@ -145,7 +164,7 @@ class Sudoku extends React.Component {
           <Grid grid={this.state.grid} />
         </div>
         <button onClick={() => this.steps()}>Solve</button>
-        <button onClick={() => this.setState({grid: this.randomGrid()})}>Random</button>
+        <button onClick={() => this.newRandom()}>Random</button>
         <label htmlFor='speed'>Faster</label>
         <input type='range' id='start' name='speed' min='0' max='100' step='10'
           defaultValue={this.state.interval} onChange={this.handleChange.bind(this)} />
