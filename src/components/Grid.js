@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Square from './Square';
 
-class Board extends Component {
+class Grid extends Component {
   render() {
     const { grid } = this.props;
 
@@ -9,7 +9,7 @@ class Board extends Component {
       return (
         <tr key={'row-' + i}>
           {arr.map((val, j) => {
-            return (<Square value={val} key={i+'-'+j} />)
+            return (<Square key={i+'-'+j} value={val} />)
           })}
         </tr>
       )
@@ -25,4 +25,4 @@ class Board extends Component {
   }
 }
 
-export default Board;
+export default Grid;
