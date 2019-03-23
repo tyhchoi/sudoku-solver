@@ -14,7 +14,8 @@ class Sudoku extends React.Component {
     this.state = {
       grid,
       gridStates,
-      interval: 10
+      interval: 10,
+      count: 0
     };
   }
 
@@ -135,12 +136,20 @@ class Sudoku extends React.Component {
     return gridStates;
   }
 
-  steps() {
-    let count = 0;
+  loop() {
+    const initialInterval = this.state.interval;
+    let { count } = this.state;
     const timer = setInterval(() => {
       this.setState({grid: this.state.gridStates[count]});
       count++;
-      if (count === this.state.gridStates.length) {
+
+      if (initialInterval !== this.state.interval) {
+        this.setState({count});
+        clearInterval(timer);
+        this.loop();
+      }
+
+      if (count >= this.state.gridStates.length) {
         clearInterval(timer);
       }
     }, this.state.interval);
@@ -150,7 +159,11 @@ class Sudoku extends React.Component {
     const grid = this.randomGrid();
     const gridStates = this.solve(JSON.parse(JSON.stringify(grid)));
 
-    this.setState({grid, gridStates});
+    this.setState({
+      grid,
+      gridStates,
+      count: 0
+    });
   }
 
   handleChange(e) {
@@ -163,10 +176,10 @@ class Sudoku extends React.Component {
         <div className='sudoku-grid'>
           <Grid grid={this.state.grid} />
         </div>
-        <button onClick={() => this.steps()}>Solve</button>
+        <button onClick={() => this.loop()}>Solve</button>
         <button onClick={() => this.newRandom()}>Random</button>
         <label htmlFor='speed'>Faster</label>
-        <input type='range' id='start' name='speed' min='0' max='100' step='10'
+        <input type='range' id='start' name='speed' min='10' max='110' step='10'
           defaultValue={this.state.interval} onChange={this.handleChange.bind(this)} />
         <label htmlFor='speed'>Slower</label>
       </div>
