@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Square from './Square';
 
-class Grid extends Component {
+class Grid extends React.Component {
   static propTypes = {
     grid: PropTypes.array
   }

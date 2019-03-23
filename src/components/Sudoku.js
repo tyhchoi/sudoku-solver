@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Grid from './Grid';
 import file from '../files/sudoku.json'
 
 const LENGTH = 9;
 const NUMVALS = 65500;
 
-class Sudoku extends Component {
+class Sudoku extends React.Component {
   state = {
     grid: this.randomGrid(),
     interval: 10
