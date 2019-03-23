@@ -15,7 +15,8 @@ class Sudoku extends React.Component {
       grid,
       gridStates,
       interval: 10,
-      count: 0
+      count: 0,
+      timer: null
     };
   }
 
@@ -153,16 +154,21 @@ class Sudoku extends React.Component {
         clearInterval(timer);
       }
     }, this.state.interval);
+
+    this.setState({timer});
   }
 
   newRandom() {
+    clearInterval(this.state.timer);
+
     const grid = this.randomGrid();
     const gridStates = this.solve(JSON.parse(JSON.stringify(grid)));
 
     this.setState({
       grid,
       gridStates,
-      count: 0
+      count: 0,
+      timer: null
     });
   }
 
