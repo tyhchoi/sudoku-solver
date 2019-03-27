@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 class Square extends React.Component {
   static propTypes = {
-    value: PropTypes.string
+    value: PropTypes.string,
+    cName: PropTypes.string
   }
 
   render() {
+    const {cName, value} = this.props;
     return (
-      <td className="square">
-        {this.props.value}
+      <td className={cName}>
+        {value}
       </td>
     );
   }

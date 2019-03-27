@@ -12,9 +12,35 @@
     width: 50px;
 }
 
+.top {
+    border-top: 4px solid #000;
+}
+
+.bottom {
+    border-bottom: 4px solid #000;
+}
+
+.left {
+    border-left: 4px solid #000;
+}
+
+.right {
+    border-right: 4px solid #000;
+}
+
 .sudoku {
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+}
+
+.sudoku-grid {
+    flex: 5;
+    margin: auto;
+}
+
+.sudoku-controls {
+    flex: 1;
+}
+
+.title {
     text-align: center;
-    width: 500px;
 }

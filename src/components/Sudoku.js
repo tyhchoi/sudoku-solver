@@ -58,17 +58,21 @@ class Sudoku extends React.Component {
 
   render() {
     return (
-      <div className='sudoku'>
-        <h1>DFS Visualizer using Sudoku</h1>
-        <div className='sudoku-grid'>
-          <Grid grid={this.state.grid} />
+      <div>
+        <h1 className='title'>DFS Visualizer using Sudoku</h1>
+        <div className='sudoku'>
+          <div className='sudoku-grid'>
+            <Grid grid={this.state.grid} />
+          </div>
+          <div className='sudoku-controls'>
+            <button onClick={() => this.loop()}>Solve</button>
+            <button onClick={() => this.newRandom()}>Random</button>
+            <label htmlFor='speed'>Faster</label>
+            <input type='range' id='start' name='speed' min='10' max='130' step='15'
+              defaultValue='10' onChange={this.handleChange.bind(this)} />
+            <label htmlFor='speed'>Slower</label>
+          </div>
         </div>
-        <button onClick={() => this.loop()}>Solve</button>
-        <button onClick={() => this.newRandom()}>Random</button>
-        <label htmlFor='speed'>Faster</label>
-        <input type='range' id='start' name='speed' min='10' max='130' step='15'
-          defaultValue='10' onChange={this.handleChange.bind(this)} />
-        <label htmlFor='speed'>Slower</label>
       </div>
     );
   }
