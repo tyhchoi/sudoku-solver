@@ -1,46 +1,48 @@
 .square {
     background: #fff;
-    border: 2px solid #999;
+    border: 0.2vw solid #999;
     float: left;
-    font-size: 24px;
+    font-size: 2.5vw;
     font-weight: bold;
-    line-height: 50px;
-    height: 50px;
-    margin-right: -1px;
-    margin-top: -3px;
+    line-height: 5vw;
+    height: 5vw;
+    margin-right: -0.5vw;
+    margin-top: -0.8vw;
     text-align: center;
-    width: 50px;
+    width: 5vw;
 }
 
 .top {
-    border-top: 4px solid #000;
+    border-top: 0.3vw solid #000;
 }
 
 .bottom {
-    border-bottom: 4px solid #000;
+    border-bottom: 0.3vw solid #000;
 }
 
 .left {
-    border-left: 4px solid #000;
+    border-left: 0.3vw solid #000;
 }
 
 .right {
-    border-right: 4px solid #000;
-}
-
-.sudoku {
-    display: flex;
-}
-
-.sudoku-grid {
-    flex: 5;
-    margin: auto;
-}
-
-.sudoku-controls {
-    flex: 1;
+    border-right: 0.3vw solid #000;
 }
 
 .title {
     text-align: center;
+}
+
+.sudoku {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid {
+    flex: 4;
+    margin: auto;
+}
+
+.controls {
+    flex: 1;
+    margin: auto;
 }
