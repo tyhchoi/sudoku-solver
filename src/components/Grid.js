@@ -22,10 +22,10 @@ class Grid extends React.Component {
 
     return (
       <table>
-          <tbody>
-            {rows}
-          </tbody>
-        </table>
+        <tbody>
+          {rows}
+        </tbody>
+      </table>
     );
   }
 }

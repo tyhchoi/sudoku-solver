@@ -59,14 +59,15 @@ class Sudoku extends React.Component {
   render() {
     return (
       <div className='sudoku'>
+        <h1>DFS Visualizer using Sudoku</h1>
         <div className='sudoku-grid'>
           <Grid grid={this.state.grid} />
         </div>
         <button onClick={() => this.loop()}>Solve</button>
         <button onClick={() => this.newRandom()}>Random</button>
         <label htmlFor='speed'>Faster</label>
-        <input type='range' id='start' name='speed' min='10' max='110' step='10'
-          defaultValue={this.state.interval} onChange={this.handleChange.bind(this)} />
+        <input type='range' id='start' name='speed' min='10' max='130' step='15'
+          defaultValue='10' onChange={this.handleChange.bind(this)} />
         <label htmlFor='speed'>Slower</label>
       </div>
     );

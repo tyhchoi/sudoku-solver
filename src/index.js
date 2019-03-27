@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Sudoku from './components/Sudoku';
+import './css/style.css';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Sudoku />, document.getElementById('root'));
