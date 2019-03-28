@@ -65,12 +65,12 @@ class Sudoku extends React.Component {
             <Grid grid={this.state.grid} />
           </div>
           <div className='controls'>
-            <button onClick={() => this.loop()}>Solve</button>
-            <button onClick={() => this.newRandom()}>Random</button>
-            <label htmlFor='speed'>Faster</label>
-            <input type='range' id='speed' min='10' max='130' step='15'
-              defaultValue='10' onChange={this.handleChange.bind(this)} />
-            <label htmlFor='speed'>Slower</label>
+            <button className='button' onClick={() => this.loop()}>Solve</button>
+            <button className='button' onClick={() => this.newRandom()}>Random</button>
+            Faster
+            <input type='range' min='10' max='145' step='15' defaultValue='10'
+              onChange={this.handleChange.bind(this)} />
+            Slower
           </div>
         </div>
       </div>
