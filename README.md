@@ -4,7 +4,7 @@ A Sudoku solver that shows each step taken when using a DFS algorithm. It can ge
 
 ![](https://raw.githubusercontent.com/tyhchoi/sudoku-solver/master/src/files/solving.gif?token=AX46CC-xBcaslbt66mGLVLhO2-Zejjwbks5cnE5uwA%3D%3D)
 
-You can try it out here
+You can try it out [here](https://tyhchoi.github.io/sudoku-solver/)
 
 ## Installing
 
@@ -14,4 +14,4 @@ You can try it out here
 
 ## Acknowledgments
 
-Sudoku dataset from: https://www.kaggle.com/bryanpark/sudoku
+[Sudoku dataset](https://www.kaggle.com/bryanpark/sudoku)
