@@ -30,7 +30,7 @@ class Grid extends React.Component {
               cName += ' right';
             }
 
-            return (<Square key={i+'-'+j} value={val} cName={cName} />)
+            return (<Square key={i+'-'+j} value={val} cName={cName} />);
           })}
         </tr>
       )

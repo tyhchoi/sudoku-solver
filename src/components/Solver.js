@@ -68,7 +68,7 @@ const checkSquare = (grid, row, col, val) => {
   return true;
 }
 
-const getEmpty = (grid) => {
+const getEmpty = grid => {
   const empty = [];
   for (let i = 0; i < LENGTH; i++) {
     for (let j = 0; j < LENGTH; j++) {
@@ -80,7 +80,7 @@ const getEmpty = (grid) => {
   return empty;
 }
 
-const solve = (grid) => {
+const solve = grid => {
   const gridStates = [];
   const empty = getEmpty(grid);
 
@@ -119,4 +119,4 @@ const solve = (grid) => {
   return gridStates;
 }
 
-export default { randomGrid, solve }
+export default { randomGrid, solve };
