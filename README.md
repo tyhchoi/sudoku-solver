@@ -2,7 +2,7 @@
 
 A Sudoku solver that shows each step taken when using a DFS algorithm. It can get a random sudoku puzzle and solve it at various speeds. Created using React.
 
-![](./files/solving.gif)
+![](https://raw.githubusercontent.com/tyhchoi/sudoku-solver/master/src/files/solving.gif?token=AX46CC-xBcaslbt66mGLVLhO2-Zejjwbks5cnE5uwA%3D%3D)
 
 You can try it out here
 
