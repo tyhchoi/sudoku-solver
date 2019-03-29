@@ -13,7 +13,8 @@ class Sudoku extends React.Component {
       gridStates,
       interval: 10,
       count: 0,
-      timer: null
+      timer: null,
+      disabled: false
     };
   }
 
@@ -48,7 +49,8 @@ class Sudoku extends React.Component {
       grid,
       gridStates,
       count: 0,
-      timer: null
+      timer: null,
+      disabled: false
     });
   }
 
@@ -65,8 +67,14 @@ class Sudoku extends React.Component {
             <Grid grid={this.state.grid} />
           </div>
           <div className='controls'>
-            <button className='button' onClick={() => this.loop()}>Solve</button>
-            <button className='button' onClick={() => this.newRandom()}>Random</button>
+            <button disabled={this.state.disabled}
+              onClick={() => {
+                this.setState({disabled: true});
+                this.loop();
+              }}>
+              Solve
+            </button>
+            <button onClick={() => this.newRandom()}>Random</button>
             Faster
             <input type='range' min='10' max='145' step='15' defaultValue='10'
               onChange={this.handleChange.bind(this)} />
