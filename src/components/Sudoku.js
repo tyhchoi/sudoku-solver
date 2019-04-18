@@ -20,12 +20,12 @@ class Sudoku extends React.Component {
   }
 
   loop() {
-    const initialInterval = this.state.interval;
+    const {interval: initialInterval, gridStates} = this.state;
     let { count } = this.state;
 
     const timer = setInterval(() => {
       count++;
-      this.setState({grid: this.state.gridStates[count]});
+      this.setState({grid: gridStates[count]});
 
       if (initialInterval !== this.state.interval) {
         this.setState({count});
@@ -38,14 +38,14 @@ class Sudoku extends React.Component {
         clearInterval(timer);
       }
 
-      if (count === this.state.gridStates.length - 1) {
+      if (count === gridStates.length - 1) {
         this.setState(prevState => ({
           count: count,
           isLooping: !prevState.isLooping
         }));
         clearInterval(timer);
       }
-    }, this.state.interval);
+    }, initialInterval);
 
     this.setState({timer});
   }
@@ -91,15 +91,17 @@ class Sudoku extends React.Component {
   }
 
   resetGrid() {
-    clearInterval(this.state.timer);
+    const {timer, isLooping, gridStates} = this.state;
 
-    if (this.state.isLooping) {
+    clearInterval(timer);
+
+    if (isLooping) {
       this.setState(prevState => ({
         isLooping: !prevState.isLooping
       }));
     }
 
-    this.setState({grid: this.state.gridStates[0], count: 0});
+    this.setState({grid: gridStates[0], count: 0});
   }
 
   handleIntervalChange(e) {
@@ -107,25 +109,27 @@ class Sudoku extends React.Component {
   }
 
   render() {
+    const {grid, gridStates, count, isLooping} = this.state;
+
     return (
       <div>
         <h1 className='title'>DFS Visualizer using Sudoku</h1>
         <div className='sudoku'>
           <div className='grid'>
-            <Grid grid={this.state.grid} />
+            <Grid grid={grid} />
           </div>
           <div className='controls'>
             <button
-              disabled={this.state.isLooping || this.state.count === 0}
+              disabled={isLooping || count === 0}
               onClick={() => this.prevGridState()}>
               &#9664;
             </button>
-            <button disabled={this.state.count >= this.state.gridStates.length}
+            <button disabled={count === gridStates.length - 1}
               onClick={() => this.toggleLoop()}>
-              {this.state.isLooping ? 'Stop' : 'Start'}
+              {isLooping ? 'Stop' : 'Start'}
             </button>
             <button
-              disabled={this.state.isLooping || this.state.count === this.state.gridStates.length - 1}
+              disabled={isLooping || count === gridStates.length - 1}
               onClick={() => this.nextGridState()}>
               &#9654;
             </button>
