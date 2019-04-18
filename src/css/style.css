@@ -8,7 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  }
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -29,20 +29,24 @@ code {
   width: 5vw;
 }
 
+.initial {
+  color: #808080;
+}
+
 .top {
-  border-top: 0.3vw solid;
+  border-top: 0.3vw solid #202020;
 }
 
 .bottom {
-  border-bottom: 0.3vw solid;
+  border-bottom: 0.3vw solid #202020;
 }
 
 .left {
-  border-left: 0.3vw solid;
+  border-left: 0.3vw solid #202020;
 }
 
 .right {
-  border-right: 0.3vw solid;
+  border-right: 0.3vw solid #202020;
 }
 
 .title {

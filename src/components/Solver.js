@@ -2,6 +2,7 @@ import file from '../files/sudoku.json'
 
 const LENGTH = 9;
 const NUMVALS = 65500;
+const SQUARELEN = 3;
 
 const randomGrid = () => {
   const random = Math.floor(Math.random() * NUMVALS);
@@ -43,16 +44,16 @@ const checkRowCol = (grid, row, col, val) => {
 }
 
 const checkSquare = (grid, row, col, val) => {
-  let rows = [0, 3];
-  let cols = [0, 3];
+  let rows = [0, SQUARELEN];
+  let cols = [0, SQUARELEN];
   while (row >= rows[1]) {
-    rows[0] += 3;
-    rows[1] += 3;
+    rows[0] += SQUARELEN;
+    rows[1] += SQUARELEN;
   }
 
   while (col >= cols[1]) {
-    cols[0] += 3;
-    cols[1] += 3;
+    cols[0] += SQUARELEN;
+    cols[1] += SQUARELEN;
   }
 
   for (let i = rows[0]; i < rows[1]; i++) {
@@ -68,7 +69,7 @@ const checkSquare = (grid, row, col, val) => {
   return true;
 }
 
-const getEmpty = grid => {
+const getInitialEmpty = grid => {
   const empty = [];
   for (let i = 0; i < LENGTH; i++) {
     for (let j = 0; j < LENGTH; j++) {
@@ -80,9 +81,21 @@ const getEmpty = grid => {
   return empty;
 }
 
+const getInitialFilled = grid => {
+  const filled = new Set();
+  for (let i = 0; i < LENGTH; i++) {
+    for (let j = 0; j < LENGTH; j++) {
+      if (grid[i][j] !== '') {
+        filled.add(`${i},${j}`);
+      }
+    }
+  }
+  return filled;
+}
+
 const solve = grid => {
   const gridStates = [];
-  const empty = getEmpty(grid);
+  const empty = getInitialEmpty(grid);
 
   const saved = [];
   for (let i = 0; i < empty.length; i++) {
@@ -119,4 +132,4 @@ const solve = grid => {
   return gridStates;
 }
 
-export default { randomGrid, solve };
+export default { randomGrid, getInitialFilled, solve };

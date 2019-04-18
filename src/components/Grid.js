@@ -10,7 +10,7 @@ class Grid extends React.Component {
   }
 
   render() {
-    const { grid } = this.props;
+    const {grid, initialFilled} = this.props;
 
     const rows = grid.map((arr, i) => {
       return (
@@ -28,6 +28,10 @@ class Grid extends React.Component {
               cName += ' left';
             } else if (j === LENGTH - 1) {
               cName += ' right';
+            }
+
+            if (initialFilled.has(`${i},${j}`)) {
+              cName += ' initial';
             }
 
             return (<Square key={i+'-'+j} value={val} cName={cName} />);

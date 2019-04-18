@@ -8,10 +8,12 @@ class Sudoku extends React.Component {
     const grid = Solver.randomGrid();
     const gridStates = Solver.solve(JSON.parse(JSON.stringify(grid)));
     gridStates.unshift(JSON.parse(JSON.stringify(grid)));
+    const initialFilled = Solver.getInitialFilled(grid);
 
     this.state = {
       grid,
       gridStates,
+      initialFilled,
       interval: 10,
       count: 0,
       timer: null,
@@ -56,10 +58,12 @@ class Sudoku extends React.Component {
     const grid = Solver.randomGrid();
     const gridStates = Solver.solve(JSON.parse(JSON.stringify(grid)));
     gridStates.unshift(JSON.parse(JSON.stringify(grid)));
+    const initialFilled = Solver.getInitialFilled(grid);
 
     this.setState({
       grid,
       gridStates,
+      initialFilled,
       count: 0,
       timer: null,
       isLooping: false
@@ -109,14 +113,14 @@ class Sudoku extends React.Component {
   }
 
   render() {
-    const {grid, gridStates, count, isLooping} = this.state;
+    const {grid, gridStates, initialFilled, count, isLooping} = this.state;
 
     return (
       <div>
         <h1 className='title'>DFS Visualizer using Sudoku</h1>
         <div className='sudoku'>
           <div className='grid'>
-            <Grid grid={grid} />
+            <Grid grid={grid} initialFilled={initialFilled} />
           </div>
           <div className='controls'>
             <button
