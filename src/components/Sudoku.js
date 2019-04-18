@@ -14,7 +14,8 @@ class Sudoku extends React.Component {
       interval: 10,
       count: 0,
       timer: null,
-      disabled: false
+      disabled: false,
+      runningLoop: false
     };
   }
 
@@ -31,7 +32,13 @@ class Sudoku extends React.Component {
         this.loop();
       }
 
+      if (!this.state.runningLoop) {
+        this.setState({count});
+        clearInterval(timer);
+      }
+
       if (count >= this.state.gridStates.length) {
+        this.setState({disabled: true})
         clearInterval(timer);
       }
     }, this.state.interval);
@@ -50,7 +57,8 @@ class Sudoku extends React.Component {
       gridStates,
       count: 0,
       timer: null,
-      disabled: false
+      disabled: false,
+      runningLoop: false
     });
   }
 
@@ -69,10 +77,14 @@ class Sudoku extends React.Component {
           <div className='controls'>
             <button disabled={this.state.disabled}
               onClick={() => {
-                this.setState({disabled: true});
-                this.loop();
+                this.setState(prevState => ({
+                  runningLoop: !prevState.runningLoop
+                }));
+                if (!this.state.runningLoop) {
+                  this.loop();
+                }
               }}>
-              Solve
+              {this.state.runningLoop ? 'Stop' : 'Start'}
             </button>
             <button onClick={() => this.newRandom()}>Random</button>
             Faster
