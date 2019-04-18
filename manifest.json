@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sudoku Solver",
+  "name": "DFS Visualizer with Sudoku",
   "icons": [
     {
       "src": "favicon.ico",
