@@ -15,7 +15,7 @@ class Sudoku extends React.Component {
       interval: 10,
       count: 0,
       timer: null,
-      runningLoop: false
+      isLooping: false
     };
   }
 
@@ -36,7 +36,7 @@ class Sudoku extends React.Component {
         this.loop();
       }
 
-      if (!this.state.runningLoop) {
+      if (!this.state.isLooping) {
         this.setState({count});
         clearInterval(timer);
       }
@@ -44,7 +44,7 @@ class Sudoku extends React.Component {
       if (count === this.state.gridStates.length - 1) {
         this.setState(prevState => ({
           count,
-          runningLoop: !prevState.runningLoop
+          isLooping: !prevState.isLooping
         }));
         clearInterval(timer);
       }
@@ -53,7 +53,7 @@ class Sudoku extends React.Component {
     this.setState({timer});
   }
 
-  newRandom() {
+  newRandomGrid() {
     clearInterval(this.state.timer);
 
     const grid = Solver.randomGrid();
@@ -65,28 +65,28 @@ class Sudoku extends React.Component {
       gridStates,
       count: 0,
       timer: null,
-      runningLoop: false
+      isLooping: false
     });
   }
 
-  solveOrStop() {
+  toggleLoop() {
     this.setState(prevState => ({
-      runningLoop: !prevState.runningLoop
+      isLooping: !prevState.isLooping
     }));
 
-    if (!this.state.runningLoop) {
+    if (!this.state.isLooping) {
       this.loop();
     }
   }
 
-  prevState() {
+  prevGridState() {
     this.setState(prevState => ({
       count: prevState.count - 1,
       grid: prevState.gridStates[prevState.count - 1]
     }));
   }
 
-  nextState() {
+  nextGridState() {
     this.setState(prevState => ({
       count: prevState.count + 1,
       grid: prevState.gridStates[prevState.count + 1]
@@ -96,9 +96,9 @@ class Sudoku extends React.Component {
   resetGrid() {
     clearInterval(this.state.timer);
 
-    if (this.state.runningLoop) {
+    if (this.state.isLooping) {
       this.setState(prevState => ({
-        runningLoop: !prevState.runningLoop
+        isLooping: !prevState.isLooping
       }));
     }
 
@@ -119,21 +119,21 @@ class Sudoku extends React.Component {
           </div>
           <div className='controls'>
             <button
-              disabled={this.state.runningLoop || this.state.count === 0}
-              onClick={() => this.prevState()}>
+              disabled={this.state.isLooping || this.state.count === 0}
+              onClick={() => this.prevGridState()}>
               &#9664;
             </button>
             <button disabled={this.state.count >= this.state.gridStates.length}
-              onClick={() => this.solveOrStop()}>
-              {this.state.runningLoop ? 'Stop' : 'Start'}
+              onClick={() => this.toggleLoop()}>
+              {this.state.isLooping ? 'Stop' : 'Start'}
             </button>
             <button
-              disabled={this.state.runningLoop || this.state.count === this.state.gridStates.length - 1}
-              onClick={() => this.nextState()}>
+              disabled={this.state.isLooping || this.state.count === this.state.gridStates.length - 1}
+              onClick={() => this.nextGridState()}>
               &#9654;
             </button>
             <button onClick={() => this.resetGrid()}>Reset</button>
-            <button onClick={() => this.newRandom()}>Random</button>
+            <button onClick={() => this.newRandomGrid()}>Random</button>
             Faster
             <input type='range' min='10' max='145' step='15' defaultValue='10'
               onChange={this.handleIntervalChange.bind(this)} />
