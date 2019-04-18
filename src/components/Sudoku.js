@@ -22,13 +22,10 @@ class Sudoku extends React.Component {
   loop() {
     const initialInterval = this.state.interval;
     let { count } = this.state;
-    if (count === 0) {
-      count++;
-    }
 
     const timer = setInterval(() => {
-      this.setState({grid: this.state.gridStates[count]});
       count++;
+      this.setState({grid: this.state.gridStates[count]});
 
       if (initialInterval !== this.state.interval) {
         this.setState({count});
@@ -43,7 +40,7 @@ class Sudoku extends React.Component {
 
       if (count === this.state.gridStates.length - 1) {
         this.setState(prevState => ({
-          count,
+          count: count,
           isLooping: !prevState.isLooping
         }));
         clearInterval(timer);
