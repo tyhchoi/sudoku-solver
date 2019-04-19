@@ -19,6 +19,13 @@ class Sudoku extends React.Component {
       timer: null,
       isLooping: false
     };
+
+    this.newRandomGrid = this.newRandomGrid.bind(this);
+    this.toggleLoop = this.toggleLoop.bind(this);
+    this.prevGridState = this.prevGridState.bind(this);
+    this.nextGridState = this.nextGridState.bind(this);
+    this.resetGrid = this.resetGrid.bind(this);
+    this.handleIntervalChange = this.handleIntervalChange.bind(this);
   }
 
   loop() {
@@ -125,23 +132,23 @@ class Sudoku extends React.Component {
           <div className='controls'>
             <button
               disabled={isLooping || count === 0}
-              onClick={() => this.prevGridState()}>
+              onClick={this.prevGridState}>
               &#9664;
             </button>
             <button disabled={count === gridStates.length - 1}
-              onClick={() => this.toggleLoop()}>
+              onClick={this.toggleLoop}>
               {isLooping ? 'Stop' : 'Start'}
             </button>
             <button
               disabled={isLooping || count === gridStates.length - 1}
-              onClick={() => this.nextGridState()}>
+              onClick={this.nextGridState}>
               &#9654;
             </button>
-            <button onClick={() => this.resetGrid()}>Reset</button>
-            <button onClick={() => this.newRandomGrid()}>Random</button>
+            <button onClick={this.resetGrid}>Reset</button>
+            <button onClick={this.newRandomGrid}>Random</button>
             Faster
             <input type='range' min='10' max='145' step='15' defaultValue='10'
-              onChange={this.handleIntervalChange.bind(this)} />
+              onChange={this.handleIntervalChange} />
             Slower
           </div>
         </div>
