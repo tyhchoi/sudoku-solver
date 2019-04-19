@@ -6,7 +6,8 @@ const LENGTH = 9;
 
 class Grid extends React.Component {
   static propTypes = {
-    grid: PropTypes.array
+    grid: PropTypes.array,
+    initialFilled: PropTypes.instanceOf(Set)
   }
 
   render() {
