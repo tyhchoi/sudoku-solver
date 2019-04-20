@@ -99,6 +99,19 @@ button {
   text-align: center;
 }
 
+button:enabled:hover {
+  background-color: var(--theme-light-color1);
+  transition: background-color 1s;
+}
+
 input[type="range"] {
-  width: 12vw;
+  width: 10vw;
+}
+
+select {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: var(--theme-dark-color2);
+  color: var(--theme-light-color3);
 }
