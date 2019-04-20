@@ -1,6 +1,8 @@
 import React from 'react';
 import Grid from './Grid';
 import Solver from './Solver';
+import CSSThemeChanger from './CSSThemeChanger';
+import themes from '../files/themes';
 
 class Sudoku extends React.Component {
   constructor() {
@@ -10,6 +12,8 @@ class Sudoku extends React.Component {
     gridStates.unshift(JSON.parse(JSON.stringify(grid)));
     const initialFilled = Solver.getInitialFilled(grid);
 
+    const theme = themes.grayscale;
+
     this.state = {
       grid,
       gridStates,
@@ -17,7 +21,8 @@ class Sudoku extends React.Component {
       interval: 10,
       count: 0,
       timer: null,
-      isLooping: false
+      isLooping: false,
+      theme
     };
 
     this.newRandomGrid = this.newRandomGrid.bind(this);
@@ -26,6 +31,7 @@ class Sudoku extends React.Component {
     this.nextGridState = this.nextGridState.bind(this);
     this.resetGrid = this.resetGrid.bind(this);
     this.handleIntervalChange = this.handleIntervalChange.bind(this);
+    this.handleThemeChange = this.handleThemeChange.bind(this);
   }
 
   loop() {
@@ -119,17 +125,27 @@ class Sudoku extends React.Component {
     this.setState({interval: e.target.value});
   }
 
+  handleThemeChange(e) {
+    this.setState({theme: themes[e.target.value]})
+  }
+
   render() {
-    const {grid, gridStates, initialFilled, count, isLooping} = this.state;
+    const {grid, gridStates, initialFilled, count, isLooping, theme} = this.state;
 
     return (
       <div>
+        <CSSThemeChanger theme={theme} />
         <h1 className='title'>DFS Visualizer using Sudoku</h1>
         <div className='sudoku'>
           <div className='grid'>
             <Grid grid={grid} initialFilled={initialFilled} />
           </div>
           <div className='controls'>
+            <select onChange={this.handleThemeChange}>
+              <option value="grayscale">Grayscale</option>
+              <option value="greenpink">Green/Pink</option>
+              <option value="colorful">Colorful</option>
+            </select>
             <button
               disabled={isLooping || count === 0}
               onClick={this.prevGridState}>
