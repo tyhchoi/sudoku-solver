@@ -19,7 +19,7 @@ class Sudoku extends React.Component {
       count: 0,
       timer: null,
       isLooping: false,
-      theme: themes.grayscale
+      theme: themes.gray
     };
 
     this.newRandomGrid = this.newRandomGrid.bind(this);
@@ -128,9 +128,10 @@ class Sudoku extends React.Component {
           </div>
           <div className='controls'>
             <select onChange={this.handleThemeChange}>
-              <option value="grayscale">Grayscale</option>
-              <option value="greenpink">Green/Pink</option>
-              <option value="colorful">Colorful</option>
+              <option value="gray">Gray</option>
+              <option value="lime">Lime</option>
+              <option value="blue">Blue</option>
+              <option value="magenta">Magenta</option>
             </select>
             <button
               disabled={isLooping || count === 0}

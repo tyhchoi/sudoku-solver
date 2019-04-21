@@ -1,26 +1,30 @@
 {
-  "grayscale": {
-    "--theme-dark-color1": "#202020",
-    "--theme-dark-color2": "#505050",
-    "--theme-dark-color3": "#808080",
-    "--theme-light-color1": "#989898",
-    "--theme-light-color2": "#a9a9a9",
-    "--theme-light-color3": "#F5F5F5"
+  "gray": {
+    "--theme-main": "#838484",
+    "--theme-dark-shade": "#3F393F",
+    "--theme-dark-accent": "#9394A3",
+    "--theme-light-shade": "#F5F4F4",
+    "--theme-light-accent": "#BFC2BC"
   },
-  "greenpink": {
-    "--theme-dark-color1": "#397249",
-    "--theme-dark-color2": "#628B61",
-    "--theme-dark-color3": "#9CB770",
-    "--theme-light-color1": "#C7E1BA",
-    "--theme-light-color2": "#F3D5BD",
-    "--theme-light-color3": "#F6E4CC"
+  "lime": {
+    "--theme-main": "#A7C174",
+    "--theme-dark-shade": "#586763",
+    "--theme-dark-accent": "#9D9C9C",
+    "--theme-light-shade": "#F8F7F6",
+    "--theme-light-accent": "#B1BDA4"
   },
-  "colorful": {
-    "--theme-dark-color1": "#4A789C",
-    "--theme-dark-color2": "#E96D63",
-    "--theme-dark-color3": "#85C1F5",
-    "--theme-light-color1": "#7FCA9F",
-    "--theme-light-color2": "#F4BA70",
-    "--theme-light-color3": "#FCFEFD"
+  "blue": {
+    "--theme-main": "#7BA4C6",
+    "--theme-dark-shade": "#12539F",
+    "--theme-dark-accent": "#705D7A",
+    "--theme-light-shade": "#F4F3EF",
+    "--theme-light-accent": "#8E6A8E"
+  },
+  "magenta": {
+    "--theme-main": "#945884",
+    "--theme-dark-shade": "#241E3D",
+    "--theme-dark-accent": "#B2475E",
+    "--theme-light-shade": "#F7F9F9",
+    "--theme-light-accent": "#D88761"
   }
 }
