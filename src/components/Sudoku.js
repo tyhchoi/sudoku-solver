@@ -10,19 +10,16 @@ class Sudoku extends React.Component {
     const grid = Solver.randomGrid();
     const gridStates = Solver.solve(JSON.parse(JSON.stringify(grid)));
     gridStates.unshift(JSON.parse(JSON.stringify(grid)));
-    const initialFilled = Solver.getInitialFilled(grid);
-
-    const theme = themes.grayscale;
 
     this.state = {
       grid,
       gridStates,
-      initialFilled,
+      initialFilled: Solver.getInitialFilled(grid),
       interval: 10,
       count: 0,
       timer: null,
       isLooping: false,
-      theme
+      theme: themes.grayscale
     };
 
     this.newRandomGrid = this.newRandomGrid.bind(this);
@@ -54,10 +51,7 @@ class Sudoku extends React.Component {
       }
 
       if (count === gridStates.length - 1) {
-        this.setState(prevState => ({
-          count: count,
-          isLooping: !prevState.isLooping
-        }));
+        this.setState({count, isLooping: false});
         clearInterval(timer);
       }
     }, initialInterval);
@@ -71,12 +65,11 @@ class Sudoku extends React.Component {
     const grid = Solver.randomGrid();
     const gridStates = Solver.solve(JSON.parse(JSON.stringify(grid)));
     gridStates.unshift(JSON.parse(JSON.stringify(grid)));
-    const initialFilled = Solver.getInitialFilled(grid);
 
     this.setState({
       grid,
       gridStates,
-      initialFilled,
+      initialFilled: Solver.getInitialFilled(grid),
       count: 0,
       timer: null,
       isLooping: false
@@ -108,17 +101,10 @@ class Sudoku extends React.Component {
   }
 
   resetGrid() {
-    const {timer, isLooping, gridStates} = this.state;
+    const {timer, gridStates} = this.state;
 
     clearInterval(timer);
-
-    if (isLooping) {
-      this.setState(prevState => ({
-        isLooping: !prevState.isLooping
-      }));
-    }
-
-    this.setState({grid: gridStates[0], count: 0});
+    this.setState({grid: gridStates[0], count: 0, isLooping: false});
   }
 
   handleIntervalChange(e) {
