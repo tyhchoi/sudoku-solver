@@ -136,7 +136,7 @@ class Sudoku extends React.Component {
             <button
               disabled={isLooping || count === 0}
               onClick={this.prevGridState}>
-              &#9664;
+              &#8592;
             </button>
             <button disabled={count === gridStates.length - 1}
               onClick={this.toggleLoop}>
@@ -145,7 +145,7 @@ class Sudoku extends React.Component {
             <button
               disabled={isLooping || count === gridStates.length - 1}
               onClick={this.nextGridState}>
-              &#9654;
+              &#8594;
             </button>
             <button onClick={this.resetGrid}>Reset</button>
             <button onClick={this.newRandomGrid}>Random</button>

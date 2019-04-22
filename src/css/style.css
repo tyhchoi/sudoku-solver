@@ -113,5 +113,4 @@ select {
   color: var(--theme-light-shade);
   cursor: pointer;
   outline: none;
-  width: 8vw;
 }
