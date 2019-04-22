@@ -108,9 +108,10 @@ input[type="range"] {
 }
 
 select {
-  cursor: pointer;
-  outline: none;
   border: none;
   background: var(--theme-dark-shade);
   color: var(--theme-light-shade);
+  cursor: pointer;
+  outline: none;
+  width: 8vw;
 }
