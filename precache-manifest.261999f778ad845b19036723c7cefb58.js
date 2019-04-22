@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "22b42db7ad63e7274cc3",
-    "url": "/sudoku-solver/static/css/main.1816f04b.chunk.css"
+    "revision": "ac2bbe54234f5a34031a",
+    "url": "/sudoku-solver/static/css/main.e47bffe2.chunk.css"
   },
   {
-    "revision": "22b42db7ad63e7274cc3",
+    "revision": "ac2bbe54234f5a34031a",
     "url": "/sudoku-solver/static/js/main.949ccae2.chunk.js"
   },
   {
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/sudoku-solver/static/js/2.291ef547.chunk.js"
   },
   {
-    "revision": "2f8d24761f7a46f94c4ab6c5721ddc7f",
+    "revision": "ed8f3d1a8f856abd97e072c50bc413fd",
     "url": "/sudoku-solver/index.html"
   }
 ];
